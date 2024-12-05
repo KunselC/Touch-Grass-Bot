@@ -18,10 +18,10 @@ public class DiscordBot {
         builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.setBulkDeleteSplittingEnabled(false);
         builder.setCompression(Compression.NONE);
-        builder.setActivity(Activity.listening("")); //set your bot activity
+        builder.setActivity(Activity.listening("Mozart"));
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
-        builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
+        // builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
+        // builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
         builder.addEventListeners(new CommandListener());
         builder.build();
     }

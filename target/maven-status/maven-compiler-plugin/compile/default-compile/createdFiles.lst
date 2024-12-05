@@ -1,0 +1,7 @@
+commands/ICommand.class
+DiscordBot.class
+constants/Secret.class
+commands/commandList/ExampleCommand.class
+commands/CommandManager.class
+constants/Global.class
+commands/CommandListener.class
