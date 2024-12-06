@@ -1,6 +1,7 @@
 package commands;
 
 import commands.commandList.ExampleCommand;
+import commands.TouchGrassCommand;
 import constants.Global;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.util.*;
@@ -9,9 +10,10 @@ import java.util.regex.Pattern;
 public class CommandManager {
     private final Map<String, ICommand> commands = new HashMap<>();
 
-    CommandManager(){
+    public CommandManager(){
         //enlist the commands here
         addCommand(new ExampleCommand());
+        addCommand(new TouchGrassCommand());
     }
 
     private void addCommand(ICommand c){
@@ -31,7 +33,7 @@ public class CommandManager {
         return commands.get(commandName);
     }
 
-    void run(MessageReceivedEvent event){
+    public void run(MessageReceivedEvent event){
         final String msg = event.getMessage().getContentRaw();
         if(!msg.startsWith(Global.prefix)){
             return;
@@ -44,5 +46,4 @@ public class CommandManager {
             commands.get(command).run(args, event);
         }
     }
-
 }
