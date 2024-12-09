@@ -13,12 +13,12 @@ public class DiscordBot {
     public static JDABuilder builder;
 
     public static void main(String[] args) throws LoginException {
-        String token = Secret.token; //your bot token
+        String token = Secret.token; // your bot token
         builder = JDABuilder.createDefault(token);
         builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.setBulkDeleteSplittingEnabled(false);
         builder.setCompression(Compression.NONE);
-        builder.setActivity(Activity.listening("Mozart"));
+        builder.setActivity(Activity.listening("your commands"));
         builder.setStatus(OnlineStatus.ONLINE);
         // builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
         // builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
