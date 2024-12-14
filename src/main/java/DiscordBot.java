@@ -20,8 +20,8 @@ public class DiscordBot {
         builder.setCompression(Compression.NONE);
         builder.setActivity(Activity.listening("your commands"));
         builder.setStatus(OnlineStatus.ONLINE);
-        // builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
-        // builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
+        builder.enableIntents(GatewayIntent.GUILD_MESSAGES);
+        builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
         builder.addEventListeners(new CommandListener());
         builder.build();
     }

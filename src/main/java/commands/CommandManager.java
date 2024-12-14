@@ -34,6 +34,7 @@ public class CommandManager {
     }
 
     public void run(MessageReceivedEvent event){
+        System.out.println(event);
         final String msg = event.getMessage().getContentRaw();
         System.out.println("Processing message: " + msg); // Debugging statement
         if(!msg.startsWith(Global.prefix)){
