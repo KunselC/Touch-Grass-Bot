@@ -34,22 +34,16 @@ public class CommandManager {
     }
 
     public void run(MessageReceivedEvent event){
-        System.out.println(event);
         final String msg = event.getMessage().getContentRaw();
-        System.out.println("Processing message: " + msg); // Debugging statement
         if(!msg.startsWith(Global.prefix)){
-            System.out.println("Message does not start with prefix"); // Debugging statement
             return;
         }
 
         final String split[] = msg.replaceFirst("(?i)" + Pattern.quote(Global.prefix), "").split("\\s+");
         final String command = split[0].toLowerCase();
-        System.out.println("Command: " + command); // Debugging statement
         if(commands.containsKey(command)){
             final List<String> args = Arrays.asList(split).subList(1, split.length);
             commands.get(command).run(args, event);
-        } else {
-            System.out.println("Command not found: " + command); // Debugging statement
         }
     }
 }

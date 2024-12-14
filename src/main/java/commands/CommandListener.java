@@ -8,7 +8,7 @@ public class CommandListener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        System.out.println("Message received: " + event.getMessage().getContentRaw()); // Debugging statement
+        // System.out.println("Message received: " + event.getMessage().getContentRaw()); // Debugging statement
         cm.run(event);
     }
 }
