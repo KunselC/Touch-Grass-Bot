@@ -15,6 +15,7 @@ public class PresenceListener extends ListenerAdapter {
     @Override
     public void onUserUpdateOnlineStatus(UserUpdateOnlineStatusEvent event) {
         Member member = event.getMember();
+	System.out.println("Literally anything plz");
         logger.info("UserUpdateOnlineStatusEvent triggered for member: " + member.getEffectiveName());
         if (event.getNewOnlineStatus().equals(net.dv8tion.jda.api.OnlineStatus.ONLINE)) {
             logger.info("Member " + member.getEffectiveName() + " is now online.");

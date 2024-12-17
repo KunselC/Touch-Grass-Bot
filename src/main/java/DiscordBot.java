@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.Compression;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import utils.OnlineTimeChecker;
 
@@ -26,13 +27,17 @@ public class DiscordBot {
 
         String token = Secret.token; // your bot token
         builder = JDABuilder.createDefault(token);
-        builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
+        // builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
+	builder.enableCache(CacheFlag.ONLINE_STATUS);
         builder.setBulkDeleteSplittingEnabled(false);
         builder.setCompression(Compression.NONE);
         builder.setActivity(Activity.listening("your commands"));
         builder.setStatus(OnlineStatus.ONLINE);
         builder.enableIntents(GatewayIntent.GUILD_MESSAGES);
+        builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
+        builder.enableIntents(GatewayIntent.GUILD_PRESENCES);
         builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
+	builder.setMemberCachePolicy(MemberCachePolicy.ALL);
 
         // Create and register the PresenceListener
         PresenceListener presenceListener = new PresenceListener();

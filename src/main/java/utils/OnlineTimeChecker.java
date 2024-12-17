@@ -26,11 +26,12 @@ public class OnlineTimeChecker {
         }, 0, 60000); // Check every minute
     }
 
-    private void checkOnlineTimes() {
+    public void checkOnlineTimes() {
         logger.info("Checking online times...");
         Map<Member, Long> onlineTimes = presenceListener.getOnlineTimes();
         for (Map.Entry<Member, Long> entry : onlineTimes.entrySet()) {
             logger.info("Member: " + entry.getKey().getEffectiveName() + ", Online Time: " + entry.getValue());
+	    System.out.println(entry.getValue());
             if (entry.getValue() > threshold) {
                 logger.info("Member " + entry.getKey().getEffectiveName() + " has been online for too long.");
                 sendGrassDM(entry.getKey().getUser());
