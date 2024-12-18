@@ -2,32 +2,41 @@ package listeners;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 
+import utils.KeyValuePair;
+
 public class PresenceListener extends ListenerAdapter {
     private static final Logger logger = Logger.getLogger(PresenceListener.class.getName());
-    private final Map<Member, Long> onlineTimes = new HashMap<>();
+    private final ArrayList<KeyValuePair> onlineTimes = new ArrayList<>();
 
     @Override
     public void onUserUpdateOnlineStatus(UserUpdateOnlineStatusEvent event) {
         Member member = event.getMember();
-	System.out.println("Literally anything plz");
         logger.info("UserUpdateOnlineStatusEvent triggered for member: " + member.getEffectiveName());
         if (event.getNewOnlineStatus().equals(net.dv8tion.jda.api.OnlineStatus.ONLINE)) {
             logger.info("Member " + member.getEffectiveName() + " is now online.");
-            onlineTimes.put(member, System.currentTimeMillis());
+            onlineTimes.add(new KeyValuePair(member, System.currentTimeMillis()));
         } else {
-            long onlineTime = System.currentTimeMillis() - onlineTimes.getOrDefault(member, System.currentTimeMillis());
+	    Object time = System.currentTimeMillis();
+	    for (KeyValuePair pair : onlineTimes) {
+	        if (pair.getKey().equals(member)) {
+		    time = pair.getValue();
+		    break;
+		}
+	    };
+            long onlineTime = System.currentTimeMillis() - (long)time;
             logger.info("Member " + member.getEffectiveName() + " is now offline. Online time: " + onlineTime);
-            onlineTimes.put(member, onlineTime);
+            onlineTimes.add(new KeyValuePair(member, onlineTime));
         }
     }
 
-    public Map<Member, Long> getOnlineTimes() {
+    public ArrayList<KeyValuePair> getOnlineTimes() {
         return onlineTimes;
     }
 }

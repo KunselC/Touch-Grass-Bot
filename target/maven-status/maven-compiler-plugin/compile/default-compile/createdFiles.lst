@@ -7,5 +7,6 @@ utils/OnlineTimeChecker.class
 commands/commandList/ExampleCommand.class
 commands/CommandManager.class
 utils/OnlineTimeChecker$1.class
+utils/KeyValuePair.class
 constants/Global.class
 commands/CommandListener.class

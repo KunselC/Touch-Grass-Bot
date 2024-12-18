@@ -27,7 +27,6 @@ public class DiscordBot {
 
         String token = Secret.token; // your bot token
         builder = JDABuilder.createDefault(token);
-        // builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
 	builder.enableCache(CacheFlag.ONLINE_STATUS);
         builder.setBulkDeleteSplittingEnabled(false);
         builder.setCompression(Compression.NONE);

@@ -6,9 +6,12 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.PrivateChannel;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
+
+import utils.KeyValuePair;
 
 public class OnlineTimeChecker {
     private static final Logger logger = Logger.getLogger(OnlineTimeChecker.class.getName());
@@ -28,11 +31,15 @@ public class OnlineTimeChecker {
 
     public void checkOnlineTimes() {
         logger.info("Checking online times...");
-        Map<Member, Long> onlineTimes = presenceListener.getOnlineTimes();
-        for (Map.Entry<Member, Long> entry : onlineTimes.entrySet()) {
+        ArrayList<KeyValuePair> onlineTimes = presenceListener.getOnlineTimes();
+	checkEachUser(onlineTimes);
+    }
+
+    public void checkEachUser(ArrayList<KeyValuePair> onlineTimes) {
+	for (int i=0; i < onlineTimes.size(); i++) {
+	    KeyValuePair entry = onlineTimes.get(i);
             logger.info("Member: " + entry.getKey().getEffectiveName() + ", Online Time: " + entry.getValue());
-	    System.out.println(entry.getValue());
-            if (entry.getValue() > threshold) {
+            if ((long)entry.getValue() > threshold) {
                 logger.info("Member " + entry.getKey().getEffectiveName() + " has been online for too long.");
                 sendGrassDM(entry.getKey().getUser());
             }
